@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 蛋糕销售系统</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .auth-container {
+            max-width: 450px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .auth-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .error-message {
+            color: var(--danger-color);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .auth-links {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .auth-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🎂 甜蜜蛋糕店</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="products.html">产品</a></li>
+                    <li><a href="cart.html">购物车 (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>用户登录</h2>
+                    <p>登录您的账户以继续购物</p>
+                </div>
+
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="username">用户名 *</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">密码 *</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+
+                    <div class="error-message" id="error-message"></div>
+
+                    <button type="submit" class="btn btn-primary btn-block">登录</button>
+                </form>
+
+                <div class="auth-links">
+                    <p>还没有账户？ <a href="register.html">立即注册</a></p>
+                    <p><a href="index.html">返回首页</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 甜蜜蛋糕店. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+            const form = document.getElementById('login-form');
+
+            errorMessage.classList.remove('show');
+            form.classList.add('loading');
+
+            try {
+                const result = await login(username, password);
+
+                if (result.success) {
+                    alert('登录成功！');
+                    // 重定向到首页或之前的页面
+                    const returnUrl = new URLSearchParams(window.location.search).get('return') || 'index.html';
+                    window.location.href = returnUrl;
+                } else {
+                    errorMessage.textContent = result.message || '登录失败，请重试';
+                    errorMessage.classList.add('show');
+                }
+            } catch (error) {
+                errorMessage.textContent = '登录失败，请检查网络连接';
+                errorMessage.classList.add('show');
+            } finally {
+                form.classList.remove('loading');
+            }
+        });
+
+        // 如果已登录，重定向到首页
+        if (isLoggedIn()) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

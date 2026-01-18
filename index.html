@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蛋糕销售系统 - 首页</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🎂 甜蜜蛋糕店</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active">首页</a></li>
+                    <li><a href="products.html">产品</a></li>
+                    <li><a href="cart.html">购物车 (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>欢迎来到甜蜜蛋糕店</h2>
+                <p>精选优质食材，手工制作每一款蛋糕</p>
+                <a href="products.html" class="btn btn-primary">浏览产品</a>
+            </div>
+        </section>
+
+        <section class="featured-products">
+            <div class="container">
+                <h2>热门产品</h2>
+                <div class="product-grid" id="featured-products">
+                    <!-- 产品将通过 JavaScript 动态加载 -->
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h3>🥇 优质食材</h3>
+                        <p>选用新鲜优质的原材料</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>👨‍🍳 手工制作</h3>
+                        <p>专业烘焙师精心制作</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🚚 快速配送</h3>
+                        <p>当日下单，次日送达</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 甜蜜蛋糕店. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="js/products-data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 - 蛋糕销售系统</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .auth-container {
+            max-width: 450px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .auth-form input,
+        .auth-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .auth-form input:focus,
+        .auth-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .error-message {
+            color: var(--danger-color);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .auth-links {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .auth-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .password-hint {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🎂 甜蜜蛋糕店</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="products.html">产品</a></li>
+                    <li><a href="cart.html">购物车 (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>用户注册</h2>
+                    <p>创建您的账户开始购物</p>
+                </div>
+
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="username">用户名 *</label>
+                        <input type="text" id="username" name="username" required minlength="3">
+                        <div class="password-hint">至少3个字符</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">邮箱 *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">密码 *</label>
+                        <input type="password" id="password" name="password" required minlength="6">
+                        <div class="password-hint">至少6个字符</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-password">确认密码 *</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="full-name">姓名 *</label>
+                        <input type="text" id="full-name" name="full-name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">电话</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">地址</label>
+                        <textarea id="address" name="address" rows="3"></textarea>
+                    </div>
+
+                    <div class="error-message" id="error-message"></div>
+
+                    <button type="submit" class="btn btn-primary btn-block">注册</button>
+                </form>
+
+                <div class="auth-links">
+                    <p>已有账户？ <a href="login.html">立即登录</a></p>
+                    <p><a href="index.html">返回首页</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 甜蜜蛋糕店. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const fullName = document.getElementById('full-name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const errorMessage = document.getElementById('error-message');
+            const form = document.getElementById('register-form');
+
+            errorMessage.classList.remove('show');
+
+            // 验证密码匹配
+            if (password !== confirmPassword) {
+                errorMessage.textContent = '两次输入的密码不一致';
+                errorMessage.classList.add('show');
+                return;
+            }
+
+            form.classList.add('loading');
+
+            try {
+                const result = await register({
+                    username,
+                    email,
+                    password,
+                    full_name: fullName,
+                    phone,
+                    address
+                });
+
+                if (result.success) {
+                    alert('注册成功！');
+                    window.location.href = 'index.html';
+                } else {
+                    errorMessage.textContent = result.message || '注册失败，请重试';
+                    errorMessage.classList.add('show');
+                }
+            } catch (error) {
+                errorMessage.textContent = '注册失败，请检查网络连接';
+                errorMessage.classList.add('show');
+            } finally {
+                form.classList.remove('loading');
+            }
+        });
+
+        // 如果已登录，重定向到首页
+        if (isLoggedIn()) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

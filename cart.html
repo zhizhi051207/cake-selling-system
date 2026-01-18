@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车 - 蛋糕销售系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🎂 甜蜜蛋糕店</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="products.html">产品</a></li>
+                    <li><a href="cart.html" class="active">购物车 (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="cart-section">
+            <div class="container">
+                <h2>购物车</h2>
+
+                <div class="cart-content">
+                    <div class="cart-items" id="cart-items">
+                        <!-- 购物车项目将通过 JavaScript 动态加载 -->
+                    </div>
+
+                    <div class="cart-summary">
+                        <h3>订单摘要</h3>
+                        <div class="summary-row">
+                            <span>小计:</span>
+                            <span id="subtotal">¥0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>配送费:</span>
+                            <span id="shipping">¥20.00</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>总计:</span>
+                            <span id="total">¥0.00</span>
+                        </div>
+                        <button class="btn btn-primary btn-block" id="checkout-btn">结算</button>
+                        <a href="products.html" class="btn btn-secondary btn-block">继续购物</a>
+                    </div>
+                </div>
+
+                <div class="empty-cart" id="empty-cart" style="display: none;">
+                    <p>您的购物车是空的</p>
+                    <a href="products.html" class="btn btn-primary">去购物</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 甜蜜蛋糕店. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="js/products-data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart-page.js"></script>
+</body>
+</html>

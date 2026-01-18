@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>结算 - 蛋糕销售系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🎂 甜蜜蛋糕店</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="products.html">产品</a></li>
+                    <li><a href="cart.html">购物车 (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="checkout-section">
+            <div class="container">
+                <h2>结算</h2>
+
+                <div class="checkout-content">
+                    <div class="checkout-form">
+                        <form id="checkout-form">
+                            <h3>配送信息</h3>
+                            <div class="form-group">
+                                <label for="name">姓名 *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">电话 *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">邮箱</label>
+                                <input type="email" id="email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">地址 *</label>
+                                <textarea id="address" name="address" rows="3" required></textarea>
+                            </div>
+
+                            <h3>支付方式</h3>
+                            <div class="payment-methods">
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="wechat" checked>
+                                    <span>微信支付</span>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="alipay">
+                                    <span>支付宝</span>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="cash">
+                                    <span>货到付款</span>
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="notes">备注</label>
+                                <textarea id="notes" name="notes" rows="3" placeholder="特殊要求或备注信息"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">提交订单</button>
+                        </form>
+                    </div>
+
+                    <div class="order-summary">
+                        <h3>订单摘要</h3>
+                        <div id="order-items">
+                            <!-- 订单项目将通过 JavaScript 动态加载 -->
+                        </div>
+                        <div class="summary-totals">
+                            <div class="summary-row">
+                                <span>小计:</span>
+                                <span id="subtotal">¥0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>配送费:</span>
+                                <span id="shipping">¥20.00</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>总计:</span>
+                                <span id="total">¥0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 甜蜜蛋糕店. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="js/products-data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/orders.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+</html>

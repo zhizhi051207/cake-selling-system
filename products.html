@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品列表 - 蛋糕销售系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🎂 甜蜜蛋糕店</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="products.html" class="active">产品</a></li>
+                    <li><a href="cart.html">购物车 (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="products-section">
+            <div class="container">
+                <h2>所有产品</h2>
+
+                <div class="filters">
+                    <button class="filter-btn active" data-category="all">全部</button>
+                    <button class="filter-btn" data-category="birthday">生日蛋糕</button>
+                    <button class="filter-btn" data-category="wedding">婚礼蛋糕</button>
+                    <button class="filter-btn" data-category="cupcake">纸杯蛋糕</button>
+                    <button class="filter-btn" data-category="special">特色蛋糕</button>
+                </div>
+
+                <div class="product-grid" id="products-container">
+                    <!-- 产品将通过 JavaScript 动态加载 -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 甜蜜蛋糕店. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="js/products-data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/products.js"></script>
+</body>
+</html>
