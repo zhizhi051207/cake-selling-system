@@ -1,149 +1,259 @@
-# 蛋糕销售系统 (Cake Selling System)
+# 🎂 蛋糕销售系统 (Cake Selling System)
 
-一个简单而完整的蛋糕在线销售系统，使用纯 HTML、CSS 和 JavaScript 构建。
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
+[![MySQL](https://img.shields.io/badge/mysql-%3E%3D5.7-blue.svg)](https://www.mysql.com/)
 
-## 项目结构
+一个功能完整的蛋糕在线销售系统，采用前后端分离架构，支持用户注册登录、产品浏览、购物车管理、订单创建和查看等完整电商功能。
+
+## ✨ 项目特点
+
+- 🔐 **完整的用户认证系统** - JWT Token 认证，bcrypt 密码加密
+- 🛒 **购物车管理** - 支持添加、修改、删除商品，数据持久化
+- 📦 **订单管理** - 创建订单、查看历史、订单统计、取消订单
+- 🎨 **响应式设计** - 适配桌面和移动设备
+- 🔒 **安全可靠** - SQL 参数化查询、密码加密、JWT 认证
+- 📊 **RESTful API** - 标准化的 API 设计
+- 🗄️ **数据库设计规范** - 完整的外键约束和索引优化
+
+## 🚀 功能特性
+
+### 用户功能
+- ✅ 用户注册和登录
+- ✅ JWT Token 认证
+- ✅ 用户信息管理
+- ✅ 自动登录状态检查
+
+### 产品功能
+- ✅ 产品列表展示
+- ✅ 产品分类筛选（生日蛋糕、婚礼蛋糕、纸杯蛋糕、特色蛋糕）
+- ✅ 特色产品展示
+- ✅ 产品详情查看
+
+### 购物车功能
+- ✅ 添加商品到购物车
+- ✅ 修改商品数量
+- ✅ 删除购物车商品
+- ✅ 购物车数据持久化（localStorage）
+
+### 订单功能
+- ✅ 创建订单
+- ✅ 查看订单历史
+- ✅ 查看订单详情
+- ✅ 取消订单
+- ✅ 订单统计（总订单数、待处理、已完成、累计消费）
+
+## 🛠️ 技术栈
+
+### 后端
+- **Node.js** (v18+) - JavaScript 运行环境
+- **Express.js** (v4.x) - Web 应用框架
+- **MySQL** (v5.7+) - 关系型数据库
+- **JWT** (jsonwebtoken) - 用户认证
+- **bcrypt** - 密码加密
+- **CORS** - 跨域资源共享
+
+### 前端
+- **HTML5** - 页面结构
+- **CSS3** - 样式设计
+- **JavaScript (ES6+)** - 交互逻辑
+- **Fetch API** - HTTP 请求
+- **LocalStorage** - 本地数据存储
+
+## 📁 项目结构
 
 ```
 cake-selling-system/
 │
-├── index.html              # 主页
-├── products.html           # 产品列表页
-├── cart.html              # 购物车页
-├── checkout.html          # 结算页
+├── backend/                    # 后端代码
+│   ├── config/                # 配置文件
+│   │   ├── application.properties  # 应用配置
+│   │   └── database.js        # 数据库连接
+│   ├── controllers/           # 控制器
+│   ├── models/                # 数据模型
+│   ├── routes/                # 路由
+│   ├── middleware/            # 中间件
+│   └── server.js             # 服务器入口
 │
-├── css/
-│   └── style.css          # 全局样式
+├── sql/                       # SQL 脚本
+│   ├── create_database.sql   # 创建数据库
+│   └── insert_products.sql   # 初始数据
 │
-├── js/
-│   ├── products-data.js   # 产品数据
-│   ├── cart.js            # 购物车管理
-│   ├── main.js            # 主页功能
-│   ├── products.js        # 产品页功能
-│   ├── cart-page.js       # 购物车页功能
-│   └── checkout.js        # 结算页功能
+├── js/                        # 前端 JavaScript
+├── css/                       # 样式文件
+├── images/                    # 图片资源
 │
-└── images/                # 图片文件夹（可添加实际图片）
+├── index.html                 # 主页
+├── products.html              # 产品页
+├── cart.html                  # 购物车页
+├── checkout.html              # 结算页
+├── login.html                 # 登录页
+├── register.html              # 注册页
+└── orders.html                # 订单历史页
 ```
 
-## 功能特性
+## 🚀 快速开始
 
-### 1. 主页 (index.html)
-- 欢迎横幅
-- 展示特色产品
-- 显示店铺特色（优质食材、手工制作、快速配送）
+### 前置要求
 
-### 2. 产品页面 (products.html)
-- 显示所有产品
-- 按分类筛选（全部、生日蛋糕、婚礼蛋糕、纸杯蛋糕、特色蛋糕）
-- 产品卡片展示（图片、名称、描述、价格）
-- 添加到购物车功能
+- Node.js (v18+)
+- MySQL (v5.7+)
+- npm 或 yarn
 
-### 3. 购物车页面 (cart.html)
-- 显示购物车中的所有商品
-- 调整商品数量（增加/减少）
-- 删除商品
-- 显示订单摘要（小计、配送费、总计）
-- 继续购物或前往结算
+### 1. 克隆项目
 
-### 4. 结算页面 (checkout.html)
-- 填写配送信息（姓名、电话、邮箱、地址）
-- 选择支付方式（微信支付、支付宝、货到付款）
-- 添加订单备注
-- 显示订单摘要
-- 提交订单
+```bash
+git clone https://github.com/zhizhi051207/cake-selling-system.git
+cd cake-selling-system
+```
 
-## 技术特点
+### 2. 创建数据库
 
-- **纯前端实现**：无需后端服务器，可直接在浏览器中运行
-- **本地存储**：使用 localStorage 保存购物车和订单数据
-- **响应式设计**：适配桌面和移动设备
-- **用户友好**：添加商品时显示通知提示
-- **数据持久化**：刷新页面后购物车数据不丢失
+```bash
+mysql -u root -p < sql/create_database.sql
+mysql -u root -p < sql/insert_products.sql
+```
 
-## 如何使用
+### 3. 配置数据库连接
 
-1. **直接打开**：
-   - 在浏览器中打开 `index.html` 文件即可开始使用
+编辑 `backend/config/application.properties`：
 
-2. **使用本地服务器**（推荐）：
-   ```bash
-   # 使用 Python 3
-   python -m http.server 8000
+```properties
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=cake_selling_system
+DB_USER=root
+DB_PASSWORD=你的数据库密码
 
-   # 或使用 Node.js 的 http-server
-   npx http-server
-   ```
-   然后在浏览器中访问 `http://localhost:8000`
+SERVER_PORT=3000
+JWT_SECRET=your-secret-key-here
+SESSION_SECRET=your-session-secret-here
+```
 
-## 产品数据
+### 4. 安装并启动后端
 
-系统包含 15 种预设蛋糕产品：
-- 生日蛋糕：经典草莓、巧克力慕斯、卡通造型等
-- 婚礼蛋糕：三层婚礼蛋糕、浪漫玫瑰蛋糕
-- 纸杯蛋糕：彩虹、香草、巧克力口味
-- 特色蛋糕：芒果千层、抹茶红豆、提拉米苏等
+```bash
+cd backend
+npm install
+npm start
+```
 
-## 自定义
+### 5. 启动前端
+
+```bash
+# 在项目根目录
+python -m http.server 8000
+```
+
+### 6. 访问系统
+
+浏览器打开：`http://localhost:8000`
+
+## 📚 API 文档
+
+### 认证接口
+- `POST /api/auth/register` - 用户注册
+- `POST /api/auth/login` - 用户登录
+- `GET /api/auth/me` - 获取当前用户信息
+
+### 产品接口
+- `GET /api/products` - 获取所有产品
+- `GET /api/products?category=birthday` - 按分类获取
+- `GET /api/products/featured` - 获取特色产品
+
+### 订单接口
+- `POST /api/orders` - 创建订单
+- `GET /api/orders` - 获取订单列表
+- `GET /api/orders/:id` - 获取订单详情
+- `PUT /api/orders/:id/cancel` - 取消订单
+
+详细文档请查看 [BACKEND_README.md](BACKEND_README.md)
+
+## 🗄️ 数据库设计
+
+- **users** - 用户表
+- **products** - 产品表
+- **orders** - 订单表
+- **order_items** - 订单详情表
+
+## 📖 使用说明
+
+1. **注册账号** - 填写用户信息
+2. **登录系统** - 使用用户名和密码
+3. **浏览产品** - 查看蛋糕列表
+4. **添加购物车** - 选择心仪的蛋糕
+5. **结算订单** - 填写配送信息
+6. **查看订单** - 查看订单历史
+
+## 🔒 安全性
+
+- ✅ bcrypt 密码加密
+- ✅ JWT Token 认证
+- ✅ SQL 参数化查询
+- ✅ CORS 跨域配置
+
+## 🎨 自定义
 
 ### 添加新产品
-编辑 `js/products-data.js` 文件，在 `products` 数组中添加新产品：
+
+编辑 `js/products-data.js`：
 
 ```javascript
 {
     id: 16,
     name: "新产品名称",
-    category: "birthday", // birthday, wedding, cupcake, special
+    category: "birthday",
     price: 188,
     description: "产品描述",
-    image: "🎂", // 可以使用 emoji 或图片路径
-    featured: false // 是否在首页展示
+    image: "🎂",
+    featured: false
 }
 ```
 
 ### 修改样式
-编辑 `css/style.css` 文件来自定义颜色、字体和布局。
 
-主要颜色变量：
+编辑 `css/style.css`：
+
 ```css
 :root {
-    --primary-color: #ff6b9d;      /* 主色调 */
-    --secondary-color: #c44569;    /* 次要色调 */
-    --text-color: #333;            /* 文字颜色 */
-    --light-bg: #fff5f8;           /* 浅色背景 */
+    --primary-color: #ff6b9d;
+    --secondary-color: #c44569;
+    --text-color: #333;
+    --light-bg: #fff5f8;
 }
 ```
 
-### 添加真实图片
-1. 将图片放入 `images/` 文件夹
-2. 在 `products-data.js` 中修改 `image` 属性为图片路径：
-   ```javascript
-   image: "images/cake1.jpg"
-   ```
-3. 在 CSS 中调整 `.product-image` 样式
+## 🔮 未来改进
 
-## 浏览器兼容性
-
-- Chrome (推荐)
-- Firefox
-- Safari
-- Edge
-
-需要支持 ES6+ 和 localStorage。
-
-## 未来改进
-
-- [ ] 添加用户登录/注册功能
-- [ ] 订单历史查看
-- [ ] 产品搜索功能
-- [ ] 产品评价系统
-- [ ] 后端集成（数据库、支付接口）
+- [ ] 产品图片上传功能
+- [ ] 真实支付接口集成
+- [ ] 邮件通知功能
 - [ ] 管理员后台
+- [ ] 产品评价系统
+- [ ] 订单状态实时更新
+- [ ] 数据分析和报表
+- [ ] 优惠券系统
+- [ ] 积分系统
+- [ ] 产品搜索功能
 
-## 许可证
+## 📄 相关文档
+
+- [后端详细文档](BACKEND_README.md)
+- [快速启动指南](QUICKSTART.md)
+- [项目总结](PROJECT_SUMMARY.md)
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+## 📜 许可证
 
 本项目仅供学习和演示使用。
 
-## 作者
+## 👨‍💻 作者
 
-使用 Claude Code 创建
+使用 [Claude Code](https://claude.com/claude-code) 创建
+
+---
+
+⭐ 如果这个项目对你有帮助，请给它一个 Star！
